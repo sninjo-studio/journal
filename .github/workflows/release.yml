@@ -1,0 +1,15 @@
+name: Trigger Web Deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Web Repository Build
+        env:
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          gh workflow run "Static Site Deployment" --repo sninjo-studio/bloom-studio-web --ref main
